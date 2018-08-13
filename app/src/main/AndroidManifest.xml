@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.devtrae.parasolarexperience">
+    <!-- Needed to do Bluetooth communication actions, like requesting and accepting a connection
+         and transferring data -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- Needed for the Android device to initiate discovery of nearby Bluetooth Devices-->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- Needed to obtain locality information-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.devtrae.parasolarexperience.SplashScreen"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.devtrae.parasolarexperience.DeviceList"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name="com.devtrae.parasolarexperience.ledControl"
+            android:label="LED Control">
+        </activity>
+
+        <activity
+            android:name="com.devtrae.parasolarexperience.WeatherDisplay"
+            android:label="Weather Display">
+        </activity>
+    </application>
+
+</manifest>
