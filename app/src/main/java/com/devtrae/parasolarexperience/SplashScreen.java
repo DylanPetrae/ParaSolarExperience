@@ -11,7 +11,6 @@ public class SplashScreen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
@@ -22,7 +21,7 @@ public class SplashScreen extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashScreen.this,DeviceList.class);
+                    Intent intent = new Intent(SplashScreen.this,WeatherDisplay.class);
                     startActivity(intent);
                 }
             }
@@ -32,7 +31,6 @@ public class SplashScreen extends Activity {
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         super.onPause();
         finish();
     }

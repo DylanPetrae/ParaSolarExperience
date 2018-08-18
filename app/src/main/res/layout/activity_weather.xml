@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fae596"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+
     android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context=".WeatherDisplay">
 
     <TextView
@@ -16,9 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:text="City"
         android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/condDescr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,34 +34,39 @@
         android:layout_height="105dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/cityText"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="conditionIcon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/condDescr"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/condIcon"
         android:layout_below="@id/condIcon"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityText" />
+        android:text="Current Condition"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/temp"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/temp"
         style="@style/tempStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/condDescr"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="108dp"
         android:layout_toRightOf="@id/condDescr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Temperature"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/pressLab"
@@ -63,14 +74,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/condDescr"
-        android:layout_marginBottom="220dp"
-        android:layout_marginStart="8dp"
-        android:text="Pressure"
+        android:layout_marginBottom="28dp"
+        android:layout_marginStart="32dp"
+        android:text="Pressure:"
+        android:textColor="#000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/windLab"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="@+id/windLab" />
+        app:layout_constraintBottom_toTopOf="@+id/latitude"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/press"
@@ -78,8 +88,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/pressLab"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="13dp"
         android:layout_toRightOf="@id/pressLab"
+        android:textColor="#000"
         app:layout_constraintBaseline_toBaselineOf="@+id/pressLab"
         app:layout_constraintStart_toEndOf="@+id/pressLab" />
 
@@ -89,15 +100,13 @@
         android:layout_height="27dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/pressLab"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="8dp"
-        android:text="Humidity"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:text="Humidity:"
+        android:textColor="#000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/windLab"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/hum"
@@ -116,16 +125,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/humLab"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Wind"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:text="Wind:"
+        android:textColor="#000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/pressLab"
-        app:layout_constraintEnd_toEndOf="@+id/humLab"
-        app:layout_constraintHorizontal_bias="0.43"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/humLab" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/windSpeed"
@@ -133,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/windLab"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="48dp"
         android:layout_toRightOf="@id/windLab"
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/windLab"
@@ -144,22 +150,22 @@
         android:id="@+id/longitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="124dp"
         android:text="Longitude"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/updatelocation_btn"
-        app:layout_constraintEnd_toEndOf="@+id/latitude"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/latitude" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="112dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="124dp"
         android:text="Latitude"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/longitude"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -169,7 +175,7 @@
         android:id="@+id/latitude_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="24dp"
         android:text=""
         app:layout_constraintBaseline_toBaselineOf="@+id/latitude"
         app:layout_constraintStart_toEndOf="@+id/latitude" />
@@ -187,13 +193,29 @@
         android:id="@+id/updatelocation_btn"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:background="@drawable/ripple_effect"
+        android:fontFamily="sans-serif-smallcaps"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingHorizontal="8dp"
         android:text="Update Location"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33"
+        app:layout_constraintWidth_default="percent" />
 
 
 </android.support.constraint.ConstraintLayout>
