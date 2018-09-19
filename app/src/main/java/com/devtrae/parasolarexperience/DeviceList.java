@@ -1,8 +1,10 @@
 package com.devtrae.parasolarexperience;
 
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,19 +17,28 @@ import android.bluetooth.BluetoothDevice;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.UUID;
 
 
 public class DeviceList extends AppCompatActivity
 {
+    private static final String TAG = "MyActivity";
+
+    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
     //widgets
     Button btnPaired;
+    Button disconnectBtn;
     ListView devicelist;
     //Bluetooth
     private BluetoothAdapter myBluetooth = null;
     private Set<BluetoothDevice> pairedDevices;
     public static String EXTRA_ADDRESS = "device_address";
+
+    BluetoothSocket btSocket = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +48,7 @@ public class DeviceList extends AppCompatActivity
 
         //Calling widgets
         btnPaired = (Button)findViewById(R.id.button);
+        disconnectBtn = (Button)findViewById(R.id.disconnect_btn);
         devicelist = (ListView)findViewById(R.id.listView);
 
         //if the device has bluetooth
@@ -99,7 +111,7 @@ public class DeviceList extends AppCompatActivity
             String address = info.substring(info.length() - 17);
 
             // Make an intent to start next activity.
-            Intent i = new Intent(DeviceList.this, ledControl.class);
+            Intent i = new Intent(DeviceList.this, SecurityMode.class);
 
             //Change the activity.
             i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
@@ -130,4 +142,5 @@ public class DeviceList extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 }

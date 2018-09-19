@@ -21,7 +21,7 @@ public class SplashScreen extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashScreen.this,WeatherDisplay.class);
+                    Intent intent = new Intent(SplashScreen.this, WeatherDisplay.class);
                     startActivity(intent);
                 }
             }

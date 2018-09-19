@@ -1,15 +1,7 @@
 package com.devtrae.parasolarexperience;
 
 
-import android.Manifest;
-
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,38 +12,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.Response;
-
-import com.devtrae.parasolarexperience.model.Weather;
-import com.google.android.gms.common.ConnectionResult;
 
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Looper;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -62,7 +38,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -82,6 +57,7 @@ public class WeatherDisplay extends AppCompatActivity {
     private TextView mLatitudeTextView;
     private TextView mLongitudeTextView;
     private Button mUpdateLocationButton;
+    private Button mSecurityModeButton;
 
 
     private long UPDATE_INTERVAL = 2 * 1000;  /* 10 secs */
@@ -109,6 +85,7 @@ public class WeatherDisplay extends AppCompatActivity {
         mLatitudeTextView = (TextView) findViewById(R.id.latitude_textview);
         mLongitudeTextView = (TextView) findViewById(R.id.longitude_textview);
         mUpdateLocationButton = (Button) findViewById(R.id.updatelocation_btn);
+        mSecurityModeButton = (Button) findViewById(R.id.securitymode_btn);
 
         requestPermission();
 
@@ -125,21 +102,34 @@ public class WeatherDisplay extends AppCompatActivity {
                 client.getLastLocation().addOnSuccessListener(WeatherDisplay.this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        if(location!=null){
-                            double latitude = location.getLatitude();
-                            double longitude = location.getLongitude();
-                            Log.d(TAG, "Setting Location TextViews.");
-                            mLatitudeTextView.setText(String.valueOf(latitude));
-                            mLongitudeTextView.setText(String.valueOf(longitude));
-                            Log.d(TAG, "Location TextViews are set.");
-                            Log.d(TAG, "Entering find_weather method.");
-                            find_weather(String.valueOf(latitude), String.valueOf(longitude));
-                            Log.d(TAG, "Exited find_weather method.");
-                        }
+                        updateLocation(location);
                     }
                 });
             }
         });
+
+        mSecurityModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(WeatherDisplay.this, DeviceList.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void updateLocation(Location location){
+        if(location!=null){
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            Log.d(TAG, "Setting Location TextViews.");
+            mLatitudeTextView.setText(String.valueOf(latitude));
+            mLongitudeTextView.setText(String.valueOf(longitude));
+            Log.d(TAG, "Location TextViews are set.");
+            Log.d(TAG, "Entering find_weather method.");
+            find_weather(String.valueOf(latitude), String.valueOf(longitude));
+            Log.d(TAG, "Exited find_weather method.");
+        }
     }
 
     private void requestPermission(){
